@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mob-app",
-    "slug": "mob-app",
+    "name": "mob-app-assignment",
+    "slug": "mob-push-notification",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -28,6 +28,12 @@
     },
     "plugins": [
       "expo-localization"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e38f716c-4e77-43f6-a9dc-a851d2bf8073"
+      }
+    },
+    "owner": "devendra.testac"
   }
 }

@@ -28,7 +28,7 @@ const App = () => {
       setAuth(response);
     }
     fetchAuthData();
-  }, [])
+  }, []);
 
   return (
     <>
@@ -39,7 +39,6 @@ const App = () => {
           {
             auth?.token ? <Stack.Screen name={ROUTES.USER_ROUTE} component={UserScreen} options={{ title: 'User Information' }} /> : null
           }
-
         </Stack.Navigator>
       </NavigationContainer>
     </>
@@ -52,7 +51,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 });
 
 export default App;

@@ -7,6 +7,7 @@ import { View, TextInput, StyleSheet, KeyboardAvoidingView, Text, Image, Platfor
 import { EMAIL_REGEX, ROUTES, SIGNUP_API, setAuthData } from "../../utils/constant";
 import CustomButton from "../../components/CustomButton";
 import LanguagePicker from "../../components/LanguagePicker";
+import PushNotification from "../../components/PushNotification";
 
 const initialValue = {
   email: "",
@@ -95,7 +96,10 @@ const SignupScreen = ({ navigation }: any) => {
         keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
         style={styles.container}
       >
-        <LanguagePicker />
+        <View style={styles.actions}>
+          <PushNotification />
+          <LanguagePicker />
+        </View>
 
         <View>
           <View style={styles.form}>
@@ -230,6 +234,11 @@ const styles = StyleSheet.create({
   indicator: {
     flex: 1,
     justifyContent: "center",
+    alignItems: "center"
+  },
+  actions: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center"
   }
 });
