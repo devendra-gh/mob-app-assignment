@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Platform, Button } from "react-native";
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -44,16 +45,17 @@ const PushNotification = () => {
         finalStatus = status;
       }
       if (finalStatus !== 'granted') {
-        alert('Failed to get push token for push notification!');
+        console.log('Failed to get push token for push notification!');
         return;
       }
+
       token = (
         await Notifications.getExpoPushTokenAsync({
           projectId: 'e38f716c-4e77-43f6-a9dc-a851d2bf8073'
         })).data;
       console.log(token);
     } else {
-      alert('Must use physical device for Push Notifications');
+      console.log('Must use physical device for Push Notifications');
     }
 
     return token;

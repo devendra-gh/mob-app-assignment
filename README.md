@@ -14,9 +14,20 @@ Runs to download all dependencies
 ### `yarn run start`
 
 Runs the app in the development mode.\
+
 <br />
 <br />
 
+### `Multiple language`
+Added multiple language
+
+
+### `Push Notification`
+Added push notification with help of expo notification and firbase
+
+
+<br />
+<br />
 
 # Mock Server
 
