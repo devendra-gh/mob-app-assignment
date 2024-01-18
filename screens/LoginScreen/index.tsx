@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import _ from "lodash";
 import axios from 'axios';
 import { useTranslation } from "react-i18next";
+import { useTheme } from 'react-native-paper';
 import { View, TextInput, StyleSheet, KeyboardAvoidingView, Text, Image, Platform, TouchableOpacity, ActivityIndicator } from "react-native";
 
 import { ROUTES, LOGIN_API, EMAIL_REGEX, setAuthData } from "../../utils/constant";
@@ -15,6 +16,7 @@ const initialValue = {
 const LoginScreen = ({ navigation }: any) => {
   const { t } = useTranslation();
   const { i18n } = useTranslation();
+  const theme = useTheme();
 
   const [loading, setLoading] = useState<boolean>(false);
   const [form, setForm] = useState(_.cloneDeep(initialValue));
@@ -131,7 +133,7 @@ const LoginScreen = ({ navigation }: any) => {
 
           <View>
             <TouchableOpacity onPress={() => { navigation.navigate(ROUTES.SIGNUP_ROUTE) }}>
-              <Text style={styles.sigup}>{t("no_ac_sign_up")}</Text>
+              <Text style={[styles.sigup, { color: theme?.colors?.primary }]}>{t("no_ac_sign_up")}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -181,8 +183,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     textAlign: 'center',
     paddingTop: 15,
-    fontSize: 14,
-    color: "#0095fb"
+    fontSize: 14
   },
   loading: {
     position: "absolute",

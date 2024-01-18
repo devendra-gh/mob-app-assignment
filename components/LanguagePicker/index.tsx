@@ -1,6 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Modal, View, Text, Pressable, StyleSheet } from "react-native";
+import { PreferencesContext } from './PreferencesContext';
+import {
+  Switch,
+  useTheme,
+  DefaultTheme,
+  MD2LightTheme,
+  MD2DarkTheme,
+  MD3LightTheme,
+  MD3DarkTheme,
+} from 'react-native-paper';
 
 const languages = [
   { name: "en", label: "English" },
@@ -9,13 +19,103 @@ const languages = [
   { name: "fr", label: "Français" }
 ];
 
+const LightThemes: any = {
+  "en": {
+    ...DefaultTheme,
+    dark: false,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: '#7b5e97',
+      secondary: '#665a6f',
+      tertiary: '#805158',
+    },
+  },
+  "ae": {
+    ...MD2LightTheme,
+    dark: false,
+    colors: {
+      ...MD2LightTheme.colors,
+      primary: '#8f809b',
+      secondary: '#665a6f',
+      tertiary: '#805158',
+    },
+  },
+  "de": {
+    ...MD3LightTheme,
+    dark: false,
+    colors: {
+      ...MD3LightTheme.colors,
+      primary: '#525da3',
+      secondary: '#665a6f',
+      tertiary: '#805158',
+    },
+  },
+  "fr": {
+    ...MD2LightTheme,
+    dark: false,
+    colors: {
+      ...MD2LightTheme.colors,
+      primary: '#ca6767',
+      secondary: '#665a6f',
+      tertiary: '#805158',
+    }
+  }
+}
+
+const DarkThemes: any = {
+  "en": {
+    ...DefaultTheme,
+    dark: true,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: '#663399',
+      secondary: '#665a6f',
+      tertiary: '#805158',
+    }
+  },
+  "ae": {
+    ...MD2DarkTheme,
+    dark: true,
+    colors: {
+      ...MD2DarkTheme.colors,
+      primary: '#665a6f',
+      secondary: '#665a6f',
+      tertiary: '#805158',
+    }
+  },
+  "de": {
+    ...MD3DarkTheme,
+    dark: true,
+    colors: {
+      ...MD3DarkTheme.colors,
+      primary: '#303f9f',
+      secondary: '#665a6f',
+      tertiary: '#805158',
+    }
+  },
+  "fr": {
+    ...MD2DarkTheme,
+    dark: true,
+    colors: {
+      ...MD2DarkTheme.colors,
+      primary: '#d32f2f',
+      secondary: '#665a6f',
+      tertiary: '#805158',
+    }
+  }
+}
+
 const LanguagePicker = () => {
-  const [modalVisible, setModalVisible] = useState(false);
   const { i18n } = useTranslation();
+  const theme = useTheme();
+
+  const { changeTheme, isThemeDark } = useContext(PreferencesContext);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const LanguageItem = ({ name, label }: { name: string; label: string }) => (
     <Pressable
       onPress={() => {
+        changeTheme(isThemeDark ? DarkThemes[name] : LightThemes[name]);
         i18n.changeLanguage(name);
         setModalVisible(!modalVisible);
       }}
@@ -35,7 +135,9 @@ const LanguagePicker = () => {
         }}
       >
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>
+          <View
+            style={[styles.modalView, { backgroundColor: theme?.colors?.primary }]}
+          >
             {languages.map((lang) => (
               <LanguageItem {...lang} key={lang.name} />
             ))}
@@ -43,12 +145,20 @@ const LanguagePicker = () => {
         </View>
       </Modal>
 
-      <Pressable
-        style={styles.buttonOpen}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text style={styles.textStyle}>{i18n.language}</Text>
-      </Pressable>
+      <View style={{ flexDirection: "row", justifyContent: "flex-end", alignItems: "center" }}>
+        <Pressable
+          style={[styles.buttonOpen, { backgroundColor: theme?.colors?.primary }]}
+          onPress={() => setModalVisible(true)}
+        >
+          <Text style={styles.textStyle}>{i18n.language}</Text>
+        </Pressable>
+        <Switch
+          color={theme?.colors?.primary}
+          value={isThemeDark}
+          onValueChange={() => changeTheme(isThemeDark ? LightThemes[i18n.language] : DarkThemes[i18n.language])}
+        />
+      </View>
+
     </View>
   );
 };
@@ -60,7 +170,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalView: {
-    backgroundColor: "white",
     borderRadius: 5,
     paddingHorizontal: 50,
     paddingVertical: 20,
@@ -78,8 +187,9 @@ const styles = StyleSheet.create({
   textItem: {
     margin: 5,
     padding: 10,
+    fontSize: 16,
     textAlign: "center",
-    fontSize: 16
+    color: "#ffffff",
   },
   buttonOpen: {
     width: 45,
@@ -87,8 +197,7 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 10,
     elevation: 2,
-    borderRadius: 4,
-    backgroundColor: "#0095fb",
+    borderRadius: 4
   },
   textStyle: {
     color: "#ffffff",

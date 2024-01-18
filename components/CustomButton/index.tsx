@@ -1,11 +1,19 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useTheme } from 'react-native-paper';
 
-const CustomButton = ({ title, onPress }: any) => {
+interface IProps {
+  title: string,
+  onPress: any
+}
+
+const CustomButton = ({ title, onPress }: IProps) => {
+  const theme = useTheme();
+
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={styles.root}>
+      style={[styles.root, { backgroundColor: theme?.colors?.primary }]}>
       <Text style={styles.button}>
         {title}
       </Text>
@@ -24,7 +32,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '700',
     fontSize: 16,
-    color: '#fff',
+    color: "#ffffff"
   }
 });
 

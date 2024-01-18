@@ -21,9 +21,15 @@ Runs the app in the development mode.\
 ### `Multiple language`
 Added multiple language
 
+### `Multiple Themes`
+Added multiple Themes with Dark and light mode
+
 
 ### `Push Notification`
 Added push notification with help of expo notification and firbase
+
+### `Test coverage`
+Added Test coverage
 
 
 <br />
