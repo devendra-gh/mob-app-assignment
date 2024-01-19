@@ -13,7 +13,7 @@ import {
 } from 'react-native-paper';
 
 const languages = [
-  { name: "en", label: "English" },
+  { name: "en", label: "USA" },
   { name: "ae", label: "عربي" },
   { name: "de", label: "Deutsch" },
   { name: "fr", label: "Français" }
@@ -150,7 +150,7 @@ const LanguagePicker = () => {
           style={[styles.buttonOpen, { backgroundColor: theme?.colors?.primary }]}
           onPress={() => setModalVisible(true)}
         >
-          <Text style={styles.textStyle}>{i18n.language}</Text>
+          <Text style={styles.textStyle}>{languages?.find((l: any) => l?.name === i18n?.language)?.label}</Text>
         </Pressable>
         <Switch
           color={theme?.colors?.primary}
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
   },
   buttonOpen: {
-    width: 45,
+    width: "auto",
     height: 45,
     margin: 10,
     padding: 10,
