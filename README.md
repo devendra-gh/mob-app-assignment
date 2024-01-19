@@ -27,6 +27,15 @@ Added multiple Themes with Dark and light mode
 
 ### `Push Notification`
 Added push notification with help of expo notification and firbase
+Sending notification process:
+- Login Expo console application [https://expo.dev/accounts/devendra.testac]
+- Create Project
+- Copy productId [e38f716c-4e77-43f6-a9dc-a851d2bf8073]
+- Restart application
+- Open application to Real device
+- Allow Device Notification
+- Check to console, token is created or not
+- If Token created then click push notification button
 
 ### `Unit Test coverage`
 Added Test coverage
