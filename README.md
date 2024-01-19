@@ -13,7 +13,7 @@ Runs to download all dependencies
 
 ### `yarn run start`
 
-Runs the app in the development mode.\
+Runs the app in the development mode.
 
 <br />
 <br />
@@ -28,7 +28,7 @@ Added multiple Themes with Dark and light mode
 ### `Push Notification`
 Added push notification with help of expo notification and firbase
 
-### `Test coverage`
+### `Unit Test coverage`
 Added Test coverage
 
 
@@ -56,7 +56,7 @@ Open [http://localhost:5050](http://localhost:5050).
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-## `Mock API`
+## `Mock API with JWT`
 
 ### `Signup`
 [http://localhost:5050/api/auth/register] \
